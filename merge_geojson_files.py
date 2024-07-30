@@ -1,10 +1,8 @@
 import streamlit as st
 import geopandas as gpd
 import zipfile
-import os
 import io
 import pandas as pd
-from shapely.geometry import shape
 
 def extract_geojson_from_zip(zip_file):
     geojson_files = []
@@ -45,17 +43,18 @@ def main():
             st.dataframe(merged_gdf)
 
             # Save the merged GeoDataFrame to a GeoJSON file
-            merged_geojson = io.StringIO()
-            merged_gdf.to_file(merged_geojson, driver='GeoJSON')
-            merged_geojson.seek(0)
+            geojson_output = io.BytesIO()
+            merged_gdf.to_file(geojson_output, driver='GeoJSON')
+            geojson_output.seek(0)
 
             # Provide download button
             st.download_button(
                 label="Download Merged GeoJSON",
-                data=merged_geojson.getvalue(),
+                data=geojson_output.getvalue(),
                 file_name="merged.geojson",
                 mime="application/geo+json"
             )
 
 if __name__ == "__main__":
     main()
+
