@@ -38,9 +38,12 @@ def main():
 
             merged_gdf = merge_geojson_files(geojson_files)
 
+            # Convert GeoDataFrame to DataFrame for display (excluding geometry column)
+            df = merged_gdf.drop(columns='geometry')
+
             # Display the attribute table
             st.write("Attribute Table:")
-            st.dataframe(merged_gdf)
+            st.dataframe(df)
 
             # Save the merged GeoDataFrame to a GeoJSON file
             geojson_output = io.BytesIO()
@@ -57,4 +60,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
