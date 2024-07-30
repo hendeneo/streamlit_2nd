@@ -1,4 +1,13 @@
+numpy==1.24.2
+pandas==1.5.3
+geopandas==0.12.2
+streamlit==1.20.0
+fiona==1.8.22
+pykml==0.1.0
+shapely==1.8.5.post1
+lxml==4.9.1
 streamlit
-geopandas
-pykml
-lxml
+xmltodict
+geojson
+
+
